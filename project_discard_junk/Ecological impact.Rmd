@@ -1,0 +1,113 @@
+---
+title: "Ecological impact"
+author: "LGCarlson"
+date: "10/7/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+library(tidyverse)
+library(here)
+library(janitor)
+
+knitr::opts_chunk$set(echo = TRUE)
+
+nth_element <- function(vector, starting_position, n) { 
+  vector[seq(starting_position, length(vector), n)] 
+}
+```
+
+
+#### Read in data
+
+```{r read data,message=F}
+# full, raw, social indicator dataset
+social_indicators_original<-read_csv(here::here("input_data", "socialIndicatorData_2011-2015_allUSA.csv")) 
+
+# pull in full change dataset (with social vuln data added)
+community_weighted_changes<-read_csv(here::here("input_data","CommunityAggregatedWeightedChangesWithSocVulnDat.csv")) 
+
+# pull in weighted change dataset
+species_weighted_changes<-read_csv(here::here("input_data","SpeciesCommunityCFDERSWeightedChangesBothRCPs.csv"))  %>%  select(-X1)
+
+# change "Cape may" to "Cape May"
+unique_COCA_communities$ColburnCommunity[unique_COCA_communities$ColburnCommunity == "Cape may, NJ"] = "Cape May, NJ"
+
+```
+
+
+```{r}
+changes_expanded<-species_weighted_changes %>% 
+  mutate_if(is.character, str_replace_all, pattern = ".combo.b", replacement = "") %>% 
+  mutate_if(is.character, str_replace_all, pattern = "Future_", replacement = "") %>% 
+  separate(ProjectionScenario, into = c("TimeHorizon","ClimateScenario","EnsembleStat","ChangeMeasure"),sep = "_", remove = F) %>% 
+  mutate(EnsembleStat = ifelse(EnsembleStat == "cold", "pct5th", EnsembleStat)) %>% 
+  mutate(EnsembleStat = ifelse(EnsembleStat == "warm", "pct95th", EnsembleStat)) %>% 
+  mutate(ChangeMeasure = ifelse(is.na(ChangeMeasure) == T, "raw", ChangeMeasure))
+
+table(changes_expanded$ChangeMeasure)
+
+baseline_vals<-changes_expanded %>% 
+  filter(ProjectionScenario == "Baseline") %>%
+  dplyr::select(Community, CommonName, ProjectionValue) %>% 
+  filter(!is.na(ProjectionValue)) %>% 
+  dplyr::rename("BaselineProjection" = "ProjectionValue") 
+
+```
+
+
+```{r, fig.height=8, fig.width=12}
+changes_expanded %>% 
+  filter(ChangeMeasure == "percdiff") %>% 
+  filter(Statistic == "Mean") %>% 
+  filter(ClimateScenario == "rcp85") %>% 
+  left_join(community_master_sorted, by = "Community") %>% 
+  filter(ColburnCommunity == "Portland, ME") %>% 
+  ggplot(aes(x=CommonName, y=ProjectionValue)) + geom_point() + geom_hline(yintercept = 0,lty=2) +
+  facet_wrap(~TimeHorizon) + coord_flip()
+```
+
+
+```{r, fig.height=8, fig.width=12}
+changes_expanded %>% 
+  filter(ChangeMeasure == "percdiff") %>% 
+  filter(Statistic == "Mean") %>% 
+  filter(ClimateScenario == "rcp85") %>% 
+  left_join(community_master_sorted, by = "Community") %>% 
+  filter(ColburnCommunity == "Portland, ME") %>% 
+  ggplot(aes(x=CommonName, y=MeanVolume)) + geom_point() + geom_hline(yintercept = 0,lty=2) +
+  facet_wrap(~TimeHorizon) + coord_flip()
+```
+
+
+```{r, fig.height=8, fig.width=12}
+changes_expanded %>% 
+  filter(ChangeMeasure == "percdiff") %>% 
+  filter(Statistic == "Mean") %>% 
+  filter(ClimateScenario == "rcp85") %>% 
+  left_join(community_master_sorted, by = "Community") %>% 
+  filter(ColburnCommunity == "Narragansett Point Judith, RI") %>% 
+  ggplot(aes(x=CommonName, y=ProjectionValue)) + geom_point() + geom_hline(yintercept = 0,lty=2) +
+  facet_wrap(~TimeHorizon) + coord_flip()
+```
+
+
+
+```{r, fig.height=8, fig.width=12}
+changes_expanded %>% 
+  filter(ChangeMeasure == "percdiff") %>% 
+  filter(Statistic == "Mean") %>% 
+  filter(ClimateScenario == "rcp85") %>% 
+  left_join(community_master_sorted, by = "Community") %>% 
+  filter(ColburnCommunity == "Cape may, NJ") %>% 
+  ggplot(aes(x=CommonName, y=ProjectionValue)) + geom_point() + geom_hline(yintercept = 0,lty=2) +
+  facet_wrap(~TimeHorizon) + coord_flip()
+```
+
+```{r}
+
+```
+
+
+

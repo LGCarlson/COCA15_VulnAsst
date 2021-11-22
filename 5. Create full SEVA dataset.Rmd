@@ -1,0 +1,105 @@
+---
+title: "Merge COCA SEVA data"
+author: "LGCarlson"
+date: "11/1/2021"
+output: 
+  html_document:
+    toc: true
+    toc_float: false
+    theme: flatly
+    highlight: haddock
+    df_print: paged
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+
+library(tidyverse)
+library(here)
+library(janitor)
+
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+### Read in data
+
+```{r read data,message=F,warning=F}
+# data to match COCA and Colburn Community names
+match_names<-read_csv(here::here("metadata", "match_communities_Colburn_to_COCA.csv"))
+
+# sub-dataset for latitudinal sorting
+lat_sort_df <- match_names %>% select(COCA_clean,lat_sort)
+# change "Cape may" to "Cape May"
+lat_sort_df$COCA_clean[lat_sort_df$COCA_clean == "Cape may, NJ"] = "Cape May, NJ"
+
+
+# fisheries sensitivity (percent diff) data
+fisheries_sensitivity_percdiff<-read_csv(here::here("output_data", "fisheries_sensitivity_percdiff.csv")) %>% select(-COCACommunity)
+
+
+# commercial reliance data
+commercial_reliance_rescaled<-read_csv(here::here("output_data", "commercial_reliance_rescaled.csv"))  %>%
+  rename("CommercialReliance" = "mean_commreliance", "CommercialReliance_rescaled" = "rescaled_commreliance")
+# change "Cape may" to "Cape May"
+commercial_reliance_rescaled$COCA_clean[commercial_reliance_rescaled$COCA_clean == "Cape may, NJ"] = "Cape May, NJ"
+
+
+
+# social indicators/adaptive capacity data
+adaptive_capacity_rescaled<-read_csv(here::here("output_data", "adaptive_capacity_rescaled.csv")) %>% 
+  rename("AdaptiveCapacity" = "mean_adaptcapacity", "AdaptiveCapacity_rescaled" = "rescaled_adaptcapacity")
+# change "Cape may" to "Cape May"
+adaptive_capacity_rescaled$COCA_clean[adaptive_capacity_rescaled$COCA_clean == "Cape may, NJ"] = "Cape May, NJ"
+
+emerging_species_100ceiling_rescaled<-read_csv(here::here("output_data", "emerging_species_100ceiling_rescaled.csv")) %>% select(-COCACommunity)
+# change "Cape may" to "Cape May"
+emerging_species_100ceiling_rescaled$COCA_clean[emerging_species_100ceiling_rescaled$COCA_clean == "Cape may, NJ"] = "Cape May, NJ"
+```
+
+
+### Preview data  {.tabset}
+
+#### Fisheries Sensitivity
+
+```{r,message=F,warning=F,echo=F}
+head(fisheries_sensitivity_percdiff,20)
+```
+
+#### Commercial Reliance
+```{r,message=F,warning=F,echo=F}
+head(commercial_reliance_rescaled,20)
+```
+
+#### Adaptive Capacity
+```{r,message=F,warning=F,echo=F}
+head(adaptive_capacity_rescaled,20)
+```
+
+#### Emerging Species
+```{r,message=F,warning=F,echo=F}
+head(emerging_species_100ceiling_rescaled,20)
+```
+
+
+
+
+### Create full SEVA dataset
+
+```{r}
+full_SEVA<-emerging_species_100ceiling_rescaled %>% 
+  left_join(fisheries_sensitivity_percdiff, by=c("COCA_clean","TimeHorizon","ClimateScenario")) %>% 
+  left_join(adaptive_capacity_rescaled, by = "COCA_clean") %>% 
+  left_join(commercial_reliance_rescaled, by = "COCA_clean") 
+
+#length(unique(full_SEVA$COCA_clean)) should = 144
+```
+
+
+### Write data to output folder
+
+```{r write to csv}
+#write_csv(full_SEVA,here::here("output_data","full_SEVA_dataset.csv"))
+```
+
+

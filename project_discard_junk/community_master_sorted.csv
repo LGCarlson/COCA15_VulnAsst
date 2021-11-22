@@ -1,0 +1,127 @@
+LatID,ID,Community,City,State,ColburnCommunity,Long,Lat,City_raw,City_raw_community,City_raw_short,City_label,meanLat
+1,33,EASTPORT_ME,Eastport,ME,"Eastport, ME",-66.9899785,44.9061906,Eastport,"Eastport, ME",Eastport,"Eastport, ME",44.04937195714286
+2,61,LUBEC_ME,Lubec,ME,"Lubec, ME",-66.9835907,44.8585863,Lubec,"Lubec, ME",Lubec,"Lubec, ME",44.04937195714286
+3,62,MACHIASPORT_ME,Machiasport,ME,"Machiasport, ME",-67.3955242,44.6972521,Machiasport,"Machiasport, ME",Machiasport,"Machiasport, ME",44.04937195714286
+4,28,CUTLER_ME,Cutler,ME,"Cutler, ME",-67.2038737,44.6575794,Cutler,"Cutler, ME",Cutler,"Cutler, ME",44.04937195714286
+5,18,BUCKS HARBOR_ME,Bucks Harbor,ME,NA,-67.3877631,44.641946,Bucks Harbor,"Bucks Harbor, ME",Bucks Harbor,"Bucks Harbor, ME",44.04937195714286
+6,1,ADDISON_ME,Addison,ME,"Addison, ME",-67.7441645,44.6184102,Addison,"Addison, ME",Addison,"Addison, ME",44.04937195714286
+7,66,MILBRIDGE_ME,Milbridge,ME,"Milbridge, ME",-67.8808344,44.5353556,Milbridge,"Milbridge, ME",Milbridge,"Milbridge, ME",44.04937195714286
+8,57,JONESPORT_ME,Jonesport,ME,"Jonesport, ME",-67.6030098,44.531045399999996,Jonesport,"Jonesport, ME",Jonesport,"Jonesport, ME",44.04937195714286
+9,47,HANCOCK_ME,Hancock,ME,"Hancock, ME",-68.2537463,44.5291357,Hancock,"Hancock, ME",Hancock,"Hancock, ME",44.04937195714286
+10,7,BEALS ISLAND_ME,Beals Island,ME,"Beals, ME",-67.615038,44.5198491,Beals Island,"Beals Island, ME",Beals Island,"Beals Island, ME",44.04937195714286
+11,112,STUEBEN_ME,Stueben,ME,"Steuben, ME",-67.9652562,44.5107169,Stueben,"Stueben, ME",Stueben,"Stueben, ME",44.04937195714286
+12,44,GOULDSBORO_COREA_PROSPECT_HARBOR_ME,Gouldsboro/Corea/Prospect Harbor,ME,"Gouldsboro Corea Prospect Harbor, ME",-68.039543,44.47852,Gouldsboro Corea Prospect Harbor,"Gouldsboro Corea Prospect Harbor, ME",Gouldsboro Corea ...,"Gouldsboro Corea ..., ME",44.04937195714286
+13,104,SORRENTO_ME,Sorrento,ME,"Sorrento, ME",-68.1772341,44.4734117,Sorrento,"Sorrento, ME",Sorrento,"Sorrento, ME",44.04937195714286
+14,11,BLUE HILL_ME,Blue Hill,ME,"Blue Hill, ME",-68.5866904,44.4139662,Blue Hill,"Blue Hill, ME",Blue Hill,"Blue Hill, ME",44.04937195714286
+15,123,WINTER HARBOR_ME,Winter Harbor,ME,"Winter Harbor, ME",-68.0830278,44.3947873,Winter Harbor,"Winter Harbor, ME",Winter Harbor,"Winter Harbor, ME",44.04937195714286
+16,4,BAR HARBOR_ME,Bar Harbor,ME,"Bar Harbor, ME",-68.2039123,44.3876119,Bar Harbor,"Bar Harbor, ME",Bar Harbor,"Bar Harbor, ME",44.04937195714286
+17,19,BUNKERS HARBOR_ME,Bunkers Harbor,ME,NA,-68.0294234,44.3711836,Bunkers Harbor,"Bunkers Harbor, ME",Bunkers Harbor,"Bunkers Harbor, ME",44.04937195714286
+18,76,NORTHEAST HARBOR_ME,Northeast Harbor,ME,NA,-68.2903234,44.2942813,Northeast Harbor,"Northeast Harbor, ME",Northeast Harbor,"Northeast Harbor, ME",44.04937195714286
+19,109,SOUTHWEST HARBOR_ME,Southwest Harbor,ME,"Southwest Harbor, ME",-68.3249914,44.2798252,Southwest Harbor,"Southwest Harbor, ME",Southwest Harbor,"Southwest Harbor, ME",44.04937195714286
+20,114,TREMONT_ME,Tremont,ME,"Tremont, ME",-68.3519157,44.2537017,Tremont,"Tremont, ME",Tremont,"Tremont, ME",44.04937195714286
+21,93,ROCKPORT_ME,Rockport,ME,"Rockport, ME",-69.0760975,44.1844817,Rockport,"Rockport, ME",Rockport,"Rockport, ME",44.04937195714286
+22,110,STONINGTON_ME,Stonington,ME,"Stonington, ME",-68.6666926,44.156192,Stonington,"Stonington, ME",Stonington,"Stonington, ME",44.04937195714286
+23,113,SWANS ISLAND_ME,Swans Island,ME,"Swans Island, ME",-68.4514104,44.1454426,Swans Island,"Swans Island, ME",Swans Island,"Swans Island, ME",44.04937195714286
+24,91,ROCKLAND_ME,Rockland,ME,"Rockland, ME",-69.1089293,44.1036914,Rockland,"Rockland, ME",Rockland,"Rockland, ME",44.04937195714286
+25,81,OWLS HEAD_ME,Owls Head,ME,"Owls Head, ME",-69.0572612,44.082303,Owls Head,"Owls Head, ME",Owls Head,"Owls Head, ME",44.04937195714286
+26,107,SOUTH THOMASTON_ME,South Thomaston,ME,"South Thomaston, ME",-69.1277274,44.051497,South Thomaston,"South Thomaston, ME",South Thomaston,"South Thomaston, ME",44.04937195714286
+27,115,VINALHAVEN_ME,Vinalhaven,ME,"Vinalhaven, ME",-68.836749,44.0487345,Vinalhaven,"Vinalhaven, ME",Vinalhaven,"Vinalhaven, ME",44.04937195714286
+28,27,CUSHING_ME,Cushing,ME,"Cushing, ME",-69.2614502,44.0137798,Cushing,"Cushing, ME",Cushing,"Cushing, ME",44.04937195714286
+29,14,BREMEN_ME,Bremen,ME,"Bremen, ME",-69.4026747,43.992866,Bremen,"Bremen, ME",Bremen,"Bremen, ME",44.04937195714286
+30,41,FRIENDSHIP_ME,Friendship,ME,"Friendship, ME",-69.3341229,43.9838019,Friendship,"Friendship, ME",Friendship,"Friendship, ME",44.04937195714286
+31,94,ROUND POND_ME,Round Pond,ME,NA,-69.4611586,43.9478596,Round Pond,"Round Pond, ME",Round Pond,"Round Pond, ME",44.04937195714286
+32,86,PORT_CLYDE_TENANTS_HARBOR_SAINT_GEORGE_SPRUCE_HEAD_ME,Port Clyde/Tenants Harbor/Saint George/Spruce Head,ME,NA,-69.2528247,43.9273051,Port Clyde Tenants Harbor Saint George Spruce Head,"Port Clyde Tenants Harbor Saint George Spruce Head, ME",Port Clyde Tenant...,"Port Clyde Tenant..., ME",44.04937195714286
+33,16,BRISTOL_NEW_HARBOR_PEMAQUID_ME,Bristol/New Harbor/Permaquid,ME,"Bristol New Harbor Pemaquid, ME",-69.4954131,43.9248053,Bristol New Harbor Permaquid,"Bristol New Harbor Permaquid, ME",Bristol New Harbo...,"Bristol New Harbo..., ME",44.04937195714286
+34,65,MATINICUS_ME,Matinicus,ME,"Matinicus Isle, ME",-68.840496,43.9237413,Matinicus,"Matinicus, ME",Matinicus,"Matinicus, ME",44.04937195714286
+35,17,BRUNSWICK_ME,Brunswick,ME,"Brunswick, ME",-69.966996,43.9140162,Brunswick,"Brunswick, ME",Brunswick,"Brunswick, ME",44.04937195714286
+36,105,SOUTH BRISTOL_ME,South Bristol,ME,"South Bristol, ME",-69.5611575,43.8639715,South Bristol,"South Bristol, ME",South Bristol,"South Bristol, ME",44.04937195714286
+37,40,FREEPORT_ME,Freeport,ME,"Freeport, ME",-70.1031201,43.8570065,Freeport,"Freeport, ME",Freeport,"Freeport, ME",44.04937195714286
+38,12,BOOTHBAY HARBOR_ME,Boothbay Harbor,ME,"Boothbay Harbor, ME",-69.6281014,43.8523045,Boothbay Harbor,"Boothbay Harbor, ME",Boothbay Harbor,"Boothbay Harbor, ME",44.04937195714286
+39,108,SOUTHPORT_ME,Southport,ME,"Southport, ME",-69.6586568,43.8409158,Southport,"Southport, ME",Southport,"Southport, ME",44.04937195714286
+40,39,FIVE ISLANDS_ME,Five Islands,ME,NA,-69.7111565,43.8239716,Five Islands,"Five Islands, ME",Five Islands,"Five Islands, ME",44.04937195714286
+41,42,GEORGETOWN_ME,Georgetown,ME,"Georgetown, ME",-69.752359,43.8021196,Georgetown,"Georgetown, ME",Georgetown,"Georgetown, ME",44.04937195714286
+42,49,HARPSWELL CENTER_ME,Harpswell Center,ME,NA,-69.9842148,43.801749,Harpswell Center,"Harpswell Center, ME",Harpswell Center,"Harpswell Center, ME",44.04937195714286
+43,26,CUNDYS HARBOR_ME,Cundys Harbor,ME,NA,-69.8931025,43.7970272,Cundys Harbor,"Cundys Harbor, ME",Cundys Harbor,"Cundys Harbor, ME",44.04937195714286
+44,48,HARPSWELL_BAILEY_ISLAND_ME,Harspwell/Bailey Island,ME,"Harpswell Bailey Island, ME",-69.9598343,43.7864342,Harspwell Bailey Island,"Harspwell Bailey Island, ME",Harspwell Bailey ...,"Harspwell Bailey ..., ME",44.04937195714286
+45,120,WEST POINT_ME,West Point,ME,NA,-69.8644906,43.7470286,West Point,"West Point, ME",West Point,"West Point, ME",44.04937195714286
+46,106,SOUTH HARPSWELL_ME,South Harpswell,ME,NA,-70.0140643,43.7420575,South Harpswell,"South Harpswell, ME",South Harpswell,"South Harpswell, ME",44.04937195714286
+47,23,CHEBEAGUE ISLAND_ME,Chebeague Island,ME,"Chebeague Island, ME",-70.1074892,43.7416573,Chebeague Island,"Chebeague Island, ME",Chebeague Island,"Chebeague Island, ME",44.04937195714286
+48,103,SMALL POINT_ME,Small Point,ME,NA,-69.8403236,43.7381401,Small Point,"Small Point, ME",Small Point,"Small Point, ME",44.04937195714286
+49,87,PORTLAND_ME,Portland,ME,"Portland, ME",-70.2568189,43.6590993,Portland,"Portland, ME",Portland,"Portland, ME",44.04937195714286
+50,98,SCARBOROUGH_ME,Scarborough,ME,"Scarborough, ME",-70.3344921,43.5901974,Scarborough,"Scarborough, ME",Scarborough,"Scarborough, ME",44.04937195714286
+51,21,CAPE PORPOISE_ME,Cape Porpoise,ME,NA,-70.4384925,43.372079,Cape Porpoise,"Cape Porpoise, ME",Cape Porpoise,"Cape Porpoise, ME",44.04937195714286
+52,58,KENNEBUNKPORT_ME,Kennebunkport,ME,"Kennebunkport, ME",-70.4767274,43.3617327,Kennebunkport,"Kennebunkport, ME",Kennebunkport,"Kennebunkport, ME",44.04937195714286
+53,78,OGUNQUIT_ME,Ogunquit,ME,"Ogunquit, ME",-70.5986223,43.2468352,Ogunquit,"Ogunquit, ME",Ogunquit,"Ogunquit, ME",44.04937195714286
+54,125,YORK_ME,York,ME,NA,-70.6482581,43.1617483,York,"York, ME",York,"York, ME",44.04937195714286
+55,126,YORK HARBOR_ME,York Harbor,ME,"York Harbor, ME",-70.6456077,43.1367551,York Harbor,"York Harbor, ME",York Harbor,"York Harbor, ME",44.04937195714286
+56,59,KITTERY_KITTERY_POINT_ME,Kittery/Kittery Point,ME,"Kittery Kittery Point, ME",-70.736137,43.0881256,Kittery Kittery Point,"Kittery Kittery Point, ME",Kittery Kittery P...,"Kittery Kittery P..., ME",44.04937195714286
+57,72,NEWINGTON_NH,Newington,NH,"Newington, NH",-70.8336668,43.1000871,Newington,"Newington, NH",Newington,"Newington, NH",43.016183475000005
+58,88,PORTSMOUTH_NH,Portsmouth,NH,"Portsmouth, NH",-70.7625532,43.0717552,Portsmouth,"Portsmouth, NH",Portsmouth,"Portsmouth, NH",43.016183475000005
+59,95,RYE_NH,Rye,NH,"Rye, NH",-70.7695547,43.0019301,Rye,"Rye, NH",Rye,"Rye, NH",43.016183475000005
+60,101,SEABROOK_NH,Seabrook,NH,"Seabrook, NH",-70.8655074,42.8909615,Seabrook,"Seabrook, NH",Seabrook,"Seabrook, NH",43.016183475000005
+61,56,IPSWICH_MA,Ipswich,MA,"Ipswich, MA",-70.8446366,42.6845115,Ipswich,"Ipswich, MA",Ipswich,"Ipswich, MA",41.96883369375
+62,92,ROCKPORT_MA,Rockport,MA,"Rockport, MA",-70.620363,42.6556505,Rockport,"Rockport, MA",Rockport,"Rockport, MA",41.96883369375
+63,43,GLOUCESTER_MA,Gloucester,MA,"Gloucester, MA",-70.6619888,42.6159285,Gloucester,"Gloucester, MA",Gloucester,"Gloucester, MA",41.96883369375
+64,10,BEVERLY_MA,Beverly,MA,"Beverly, MA",-70.880049,42.5584283,Beverly,"Beverly, MA",Beverly,"Beverly, MA",41.96883369375
+65,63,MARBLEHEAD_MA,Marblehead,MA,"Marblehead, MA",-70.8578024,42.4999582,Marblehead,"Marblehead, MA",Marblehead,"Marblehead, MA",41.96883369375
+66,97,SAUGUS_MA,Saugus,MA,"Saugus, MA",-71.0110473,42.4651421,Saugus,"Saugus, MA",Saugus,"Saugus, MA",41.96883369375
+67,68,NAHANT_MA,Nahant,MA,"Nahant, MA",-70.922279,42.4265633,Nahant,"Nahant, MA",Nahant,"Nahant, MA",41.96883369375
+68,13,BOSTON_MA,Boston,MA,"Boston, MA",-71.0588801,42.3600825,Boston,"Boston, MA",Boston,"Boston, MA",41.96883369375
+69,53,HULL_MA,Hull,MA,"Hull, MA",-70.9078346,42.3020647,Hull,"Hull, MA",Hull,"Hull, MA",41.96883369375
+70,25,COHASSET_MA,Cohasset,MA,"Cohasset, MA",-70.8036544,42.2417675,Cohasset,"Cohasset, MA",Cohasset,"Cohasset, MA",41.96883369375
+71,99,SCITUATE_NORTH_SCITUATE_MA,Scituate/North Scituate,MA,"Scituate North Scituate, MA",-70.7605973,42.2042681,Scituate North Scituate,"Scituate North Scituate, MA",Scituate North Sc...,"Scituate North Sc..., MA",41.96883369375
+72,64,MARSHFIELD_GREEN_HARBOR_CEDAR_CREST_MARSHFIELD_HILLS_OCEAN_BLUFF_BRANT_ROCK_MA,Marshfield/Green Harbor/Cedar Crest/Marshfield Hills/Ocean Bluff/Brant Rock,MA,NA,-70.7055871,42.0917453,Marshfield Green Harbor Cedar Crest Marshfield Hills Ocean Bluff Brant Rock,"Marshfield Green Harbor Cedar Crest Marshfield Hills Ocean Bluff Brant Rock, MA",Marshfield Green ...,"Marshfield Green ..., MA",41.96883369375
+73,89,PROVINCETOWN_MA,Provincetown,MA,"Provincetown, MA",-70.1837503,42.0507475,Provincetown,"Provincetown, MA",Provincetown,"Provincetown, MA",41.96883369375
+74,32,DUXBURY_MA,Duxbury,MA,"Duxbury, MA",-70.6957984,42.0296352,Duxbury,"Duxbury, MA",Duxbury,"Duxbury, MA",41.96883369375
+75,82,PLYMOUTH_MA,Plymouth,MA,"Plymouth, MA",-70.6672621,41.9584457,Plymouth,"Plymouth, MA",Plymouth,"Plymouth, MA",41.96883369375
+76,119,WELLFLEET_MA,Wellfleet,MA,"Wellfleet, MA",-70.0309753,41.9305468,Wellfleet,"Wellfleet, MA",Wellfleet,"Wellfleet, MA",41.96883369375
+77,80,ORLEANS_MA,Orleans,MA,"Orleans, MA",-69.9897323,41.7898354,Orleans,"Orleans, MA",Orleans,"Orleans, MA",41.96883369375
+78,96,SANDWICH_EAST_SANDWICH_FORESTDALE_MA,Sandwich/East Sandwich/Forestdale,MA,"Sandwich East Sandwich Forestdale, MA",-70.500947,41.7588324,Sandwich East Sandwich Forestdale,"Sandwich East Sandwich Forestdale, MA",Sandwich East San...,"Sandwich East San..., MA",41.96883369375
+79,30,DENNIS_MA,Dennis,MA,"Dennis, MA",-70.1939429,41.7353062,Dennis,"Dennis, MA",Dennis,"Dennis, MA",41.96883369375
+80,37,FALL RIVER_MA,Fall River,MA,"Fall River, MA",-71.1550451,41.7014912,Fall River,"Fall River, MA",Fall River,"Fall River, MA",41.96883369375
+81,6,BARNSTABLE_MA,Barnstable,MA,"Barnstable Town, MA",-70.3002024,41.7003208,Barnstable,"Barnstable, MA",Barnstable,"Barnstable, MA",41.96883369375
+82,22,CHATHAM_MA,Chatham,MA,"Chatham, MA",-69.9625246,41.6835489,Chatham,"Chatham, MA",Chatham,"Chatham, MA",41.96883369375
+83,50,HARWICHPORT_MA,Harwichport,MA,"Harwich Port, MA",-70.0591278,41.6694978,Harwichport,"Harwichport, MA",Harwichport,"Harwichport, MA",41.96883369375
+84,54,HYANNIS_MA,Hyannis,MA,NA,-70.2881124,41.6524911,Hyannis,"Hyannis, MA",Hyannis,"Hyannis, MA",41.96883369375
+85,36,FAIRHAVEN_MA,Fairhaven,MA,"Fairhaven, MA",-70.9036487,41.6376043,Fairhaven,"Fairhaven, MA",Fairhaven,"Fairhaven, MA",41.96883369375
+86,70,NEW BEDFORD_MA,New Bedford,MA,"New Bedford, MA",-70.934205,41.6362152,New Bedford,"New Bedford, MA",New Bedford,"New Bedford, MA",41.96883369375
+87,55,HYANNISPORT_MA,Hyannisport,MA,NA,-70.302933,41.6321044,Hyannisport,"Hyannisport, MA",Hyannisport,"Hyannisport, MA",41.96883369375
+88,121,WESTPORT_MA,Westport,MA,"Westport, MA",-71.0735476,41.5700183,Westport,"Westport, MA",Westport,"Westport, MA",41.96883369375
+89,38,FALMOUTH_MA,Falmouth,MA,"Falmouth, MA",-70.603467,41.5596249,Falmouth,"Falmouth, MA",Falmouth,"Falmouth, MA",41.96883369375
+90,124,WOODS HOLE_MA,Woods Hole,MA,"Woods Hole, MA",-70.6730857,41.5264977,Woods Hole,"Woods Hole, MA",Woods Hole,"Woods Hole, MA",41.96883369375
+91,34,EDGARTOWN_MA,Edgartown,MA,"Edgartown, MA",-70.5133599,41.3890052,Edgartown,"Edgartown, MA",Edgartown,"Edgartown, MA",41.96883369375
+92,69,NANTUCKET_MA,Nantucket,MA,"Nantucket, MA",-70.0991658,41.2847987,Nantucket,"Nantucket, MA",Nantucket,"Nantucket, MA",41.96883369375
+93,118,WARWICK_RI,Warwick,RI,"Warwick, RI",-71.41758,41.707274,Warwick,"Warwick, RI",Warwick,"Warwick, RI",41.562138757142854
+94,15,BRISTOL_RI,Bristol,RI,"Bristol, RI",-71.2662025,41.6771101,Bristol,"Bristol, RI",Bristol,"Bristol, RI",41.562138757142854
+95,29,DAVISVILLE_RI,Davisville,RI,NA,-71.474003,41.6127411,Davisville,"Davisville, RI",Davisville,"Davisville, RI",41.562138757142854
+96,75,NORTH_KINGSTOWN_SAUNDERSTOWN_RI,North Kingstown/Saunderstown,RI,"North Kingstown Saunderstown, RI",-71.448489,41.5722602,North Kingstown Saunderstown,"North Kingstown Saunderstown, RI",North Kingstown S...,"North Kingstown S..., RI",41.562138757142854
+97,60,LITTLE COMPTON_RI,Little Compton,RI,"Little Compton, RI",-71.1711563,41.5101032,Little Compton,"Little Compton, RI",Little Compton,"Little Compton, RI",41.562138757142854
+98,73,NEWPORT_RI,Newport,RI,"Newport, RI",-71.3128285,41.4901024,Newport,"Newport, RI",Newport,"Newport, RI",41.562138757142854
+99,83,POINT JUDITH_RI,Point Judith,RI,"Narragansett Point Judith, RI",-71.4867225,41.3653803,Point Judith,"Point Judith, RI",Point Judith,"Point Judith, RI",41.562138757142854
+100,71,NEW LONDON_CT,New London,CT,"New London, CT",-72.0995209,41.3556539,New London,"New London, CT",New London,"New London, CT",41.35495975
+101,111,STONINGTON_MYSTIC_PAWCATUCK_CT,Stonington/Mystic/Pawcatuck,CT,"Stonington Mystic Pawcatuck, CT",-71.966462,41.3542656,Stonington Mystic Pawcatuck,"Stonington Mystic Pawcatuck, CT",Stonington Mystic...,"Stonington Mystic..., CT",41.35495975
+102,67,MONTAUK_NY,Montauk,NY,"Montauk, NY",-71.9545146,41.0359353,Montauk,"Montauk, NY",Montauk,"Montauk, NY",40.8501774
+103,102,SHINNECOCK_NY,Shinnecock,NY,"Shinnecock Hills, NY",-72.4636982,40.8909338,Shinnecock,"Shinnecock, NY",Shinnecock,"Shinnecock, NY",40.8501774
+104,46,HAMPTON_BAYS_SHINNECOCK_NY,Hampton Bays/Shinnecock,NY,"Hampton Bays Shinnecock, NY",-72.51088,40.881515,Hampton Bays Shinnecock,"Hampton Bays Shinnecock, NY",Hampton Bays Shin...,"Hampton Bays Shin..., NY",40.8501774
+105,84,POINT LOOKOUT_NY,Point Lookout,NY,"Point Lookout, NY",-73.580684,40.5923255,Point Lookout,"Point Lookout, NY",Point Lookout,"Point Lookout, NY",40.8501774
+106,9,BELFORD_NJ,Belford,NJ,"Belford, NJ",-74.086807,40.425941,Belford,"Belford, NJ",Belford,"Belford, NJ",39.4765726125
+107,85,POINT  PLEASANT_NJ,Point Pleasant,NJ,"Point Pleasant, NJ",-74.0681931,40.0831714,Point Pleasant,"Point Pleasant, NJ",Point Pleasant,"Point Pleasant, NJ",39.4765726125
+108,5,BARNEGAT LIGHT/LONG BEACH_NJ,Barnegat Light/Long Beach,NJ,"Barnegat Light, NJ",-74.1062466,39.7576202,Barnegat Light Long Beach,"Barnegat Light Long Beach, NJ",Barnegat Light Lo...,"Barnegat Light Lo..., NJ",39.4765726125
+109,2,ATLANTIC CITY_NJ,Atlantic City,NJ,"Atlantic City, NJ",-74.4229266,39.3642834,Atlantic City,"Atlantic City, NJ",Atlantic City,"Atlantic City, NJ",39.4765726125
+110,100,SEA ISLE CITY_NJ,Sea Isle City,NJ,"Sea Isle City, NJ",-74.6929387,39.1534477,Sea Isle City,"Sea Isle City, NJ",Sea Isle City,"Sea Isle City, NJ",39.4765726125
+111,3,AVALON_NJ,Avalon,NJ,"Avalon, NJ",-74.7176622,39.101225,Avalon,"Avalon, NJ",Avalon,"Avalon, NJ",39.4765726125
+112,122,WILDWOOD_NJ,Wildwood,NJ,"Wildwood, NJ",-74.8148894,38.9917797,Wildwood,"Wildwood, NJ",Wildwood,"Wildwood, NJ",39.4765726125
+113,20,CAPE MAY_NJ,Cape May,NJ,"Cape may, NJ",-74.9060053,38.9351125,Cape May,"Cape May, NJ",Cape May,"Cape May, NJ",39.4765726125
+114,77,OCEAN CITY_MD,Ocean City,MD,"Ocean City, MD",-75.0882873,38.3255194,Ocean City,"Ocean City, MD",Ocean City,"Ocean City, MD",38.3255194
+115,24,CHINCOTEAGUE_VA,Chincoteague,VA,"Chincoteague, VA",-75.3788086,37.933179,Chincoteague,"Chincoteague, VA",Chincoteague,"Chincoteague, VA",37.3238883
+116,90,REEDVILLE_DISTRICT_5_VA,Reedville/District 5,VA,"Reedville District 5 Northumberland County, VA",-76.2757771,37.8420743,Reedville District 5,"Reedville District 5, VA",Reedville District 5,"Reedville District 5, VA",37.3238883
+117,31,DISTRICT_1_GRAFTON_SEAFORD_YORKTOWN_VA,District 1/Grafton/Seaford/Yorktown,VA,"District 1 Grafton Seaford Yorktown York County, VA",-76.4330032,37.1981994,District 1 Grafton Seaford Yorktown,"District 1 Grafton Seaford Yorktown, VA",District 1 Grafto...,"District 1 Grafto..., VA",37.3238883
+118,74,NEWPORT NEWS_VA,Newport News,VA,"Newport News, VA",-76.4730122,37.0870821,Newport News,"Newport News, VA",Newport News,"Newport News, VA",37.3238883
+119,45,HAMPTON_VA,Hampton,VA,"Hampton, VA",-76.3452218,37.0298687,Hampton,"Hampton, VA",Hampton,"Hampton, VA",37.3238883
+120,116,VIRGINIA BEACH/LYNNHAVEN_VA,Virginia Beach/Lynnhaven,VA,"Virginia Beach, VA",-75.977985,36.8529263,Virginia Beach Lynnhaven,"Virginia Beach Lynnhaven, VA",Virginia Beach Ly...,"Virginia Beach Ly..., VA",37.3238883
+121,117,WANCHESE_NC,Wanchese,NC,"Wanchese, NC",-75.6385054,35.8426728,Wanchese,"Wanchese, NC",Wanchese,"Wanchese, NC",35.261087016666664
+122,35,ENGELHARD_NC,Engelhard,NC,"Lake Landing Engelhard, NC",-75.9961259,35.5096699,Engelhard,"Engelhard, NC",Engelhard,"Engelhard, NC",35.261087016666664
+123,52,HOBUCKEN_NC,Hobucken,NC,"Hobucken, NC",-76.5672066,35.2455115,Hobucken,"Hobucken, NC",Hobucken,"Hobucken, NC",35.261087016666664
+124,51,HATTERAS_AVON_BUXTON_FRISCO_HATTERAS_RODANTHE_SALVO_WAVES_NC,Hatteras/Avon/Buxton/Frisco/Hatteras/Rodanthe/Salvo/Waves,NC,"Hatteras Avon Buxton Frisco Hatteras Rodanthe Salvo Waves, NC",-75.6903492,35.2194549,Hatteras Avon Buxton Frisco Hatteras Rodanthe Salvo Waves,"Hatteras Avon Buxton Frisco Hatteras Rodanthe Salvo Waves, NC",Hatteras Avon Bux...,"Hatteras Avon Bux..., NC",35.261087016666664
+125,79,ORIENTAL_NC,Oriental,NC,"Oriental, NC",-76.6929867,35.0309956,Oriental,"Oriental, NC",Oriental,"Oriental, NC",35.261087016666664
+126,8,BEAUFORT_NC,Beaufort,NC,"Beaufort, NC",-76.6638186,34.7182174,Beaufort,"Beaufort, NC",Beaufort,"Beaufort, NC",35.261087016666664

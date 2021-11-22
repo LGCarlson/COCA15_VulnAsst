@@ -1,0 +1,145 @@
+COCA_clean,mean_commreliance,rescaled_commreliance
+"Addison, ME",2,0.3333333333333333
+"Atlantic City, NJ",1,0
+"Avalon, NJ",1,0
+"Bar Harbor, ME",1.2,0.06666666666666665
+"Barnegat Light Long Beach, NJ",4,1
+"Barnstable, MA",1,0
+"Beals Island, ME",4,1
+"Beaufort, NC",2.4,0.4666666666666666
+"Belford, NJ",2.8,0.6
+"Beverly, MA",1,0
+"Blue Hill, ME",1.6,0.20000000000000004
+"Boothbay Harbor, ME",2,0.3333333333333333
+"Boston, MA",1,0
+"Bremen, ME",2,0.3333333333333333
+"Bristol New Harbor Pemaquid, ME",2,0.3333333333333333
+"Bristol, RI",1,0
+"Brunswick, ME",1,0
+"Bucks Harbor, ME",1,0
+"Cape may, NJ",4,1
+"Cape Porpoise, ME",3.2,0.7333333333333334
+"Chatham, MA",3.8,0.9333333333333332
+"Chebeague Island, ME",2.2,0.4000000000000001
+"Chincoteague, VA",2,0.3333333333333333
+"Cohasset, MA",1,0
+"Cundys Harbor, ME",2.6,0.5333333333333333
+"Cushing, ME",2,0.3333333333333333
+"Cutler, ME",3.4,0.7999999999999999
+"Dennis, MA",1,0
+"District 1 Grafton Seaford Yorktown, VA",1.2,0.06666666666666665
+"Duxbury, MA",1.8,0.26666666666666666
+"East Hampton, NY",2,0.3333333333333333
+"Eastham, MA",1,0
+"Eastport, ME",1.8,0.26666666666666666
+"Edgartown, MA",1,0
+"Engelhard, NC",2,0.3333333333333333
+"Fairhaven, MA",1.6,0.20000000000000004
+"Fall River, MA",1,0
+"Falmouth, MA",1,0
+"Freeport, ME",2,0.3333333333333333
+"Freeport, NY",1,0
+"Friendship, ME",3.6,0.8666666666666667
+"Georgetown, ME",2,0.3333333333333333
+"Gloucester, MA",2,0.3333333333333333
+"Gouldsboro Corea Prospect Harbor, ME",2.8,0.6
+"Greenport, NY",1,0
+"Hampton Bays Shinnecock, NY",1.8,0.26666666666666666
+"Hampton Hampton Compact, NH",1,0
+"Hampton, VA",1,0
+"Hancock, ME",1,0
+"Harpswell Bailey Island, ME",2.6,0.5333333333333333
+"Harwichport, MA",2,0.3333333333333333
+"Hatteras Avon Buxton Frisco Hatteras Rodanthe Salvo Waves, NC",2.2,0.4000000000000001
+"Hingham, MA",1,0
+"Hobucken, NC",1.6,0.20000000000000004
+"Hull, MA",1,0
+"Hyannis, MA",1,0
+"Hyannisport, MA",1,0
+"Ipswich, MA",1,0
+"Island Park, NY",1,0
+"Islip, NY",1,0
+"Jamestown, RI",1,0
+"Jonesport, ME",3.8,0.9333333333333332
+"Kennebunkport, ME",3.2,0.7333333333333334
+"Kittery Kittery Point, ME",1.2,0.06666666666666665
+"Little Compton, RI",2,0.3333333333333333
+"Lubec, ME",1.8,0.26666666666666666
+"Machiasport, ME",2.4,0.4666666666666666
+"Manchester, MA",1,0
+"Marblehead, MA",1,0
+"Marshfield Green Harbor Cedar Crest Marshfield Hills Ocean Bluff Brant Rock, MA",1,0
+"Matinicus, ME",4,1
+"Mattituck, NY",1,0
+"Menemsha, MA",2.2,0.4000000000000001
+"Milbridge, ME",3,0.6666666666666666
+"Montauk, NY",3.6,0.8666666666666667
+"Moriches, NY",1,0
+"Nahant, MA",1,0
+"Nantucket, MA",1.2,0.06666666666666665
+"New Bedford, MA",2,0.3333333333333333
+"New London, CT",1,0
+"New Shoreham, RI",2.2,0.4000000000000001
+"Newburyport, MA",1,0
+"Newington, NH",3.8,0.9333333333333332
+"Newport News, VA",1,0
+"Newport, RI",1,0
+"North Kingstown Saunderstown, RI",1,0
+"Oak Bluffs, MA",1,0
+"Ocean City, MD",1.8,0.26666666666666666
+"Ogunquit, ME",1.8,0.26666666666666666
+"Oriental, NC",2.6,0.5333333333333333
+"Orleans, MA",1,0
+"Owls Head, ME",2.2,0.4000000000000001
+"Pembroke, ME",1.2,0.06666666666666665
+"Plymouth, MA",1,0
+"Point Judith, RI",2,0.3333333333333333
+"Point Lookout, NY",2,0.3333333333333333
+"Point Pleasant, NJ",1,0
+"Port Clyde Tenants Harbor Saint George Spruce Head, ME",3.4,0.7999999999999999
+"Portland, ME",1.2,0.06666666666666665
+"Portsmouth, NH",1,0
+"Provincetown, MA",2,0.3333333333333333
+"Reedville District 5, VA",4,1
+"Rockland, ME",2,0.3333333333333333
+"Rockport, MA",1.2,0.06666666666666665
+"Rockport, ME",1.2,0.06666666666666665
+"Rye, NH",1.8,0.26666666666666666
+"Sandwich East Sandwich Forestdale, MA",1,0
+"Saugus, MA",1,0
+"Scarborough, ME",1.2,0.06666666666666665
+"Scituate North Scituate, MA",1.4,0.1333333333333333
+"Sea Isle City, NJ",2,0.3333333333333333
+"Seabrook, NH",1,0
+"Shinnecock, NY",1,0
+"Sorrento, ME",2.8,0.6
+"South Bristol, ME",3.2,0.7333333333333334
+"South Harpswell, ME",2.6,0.5333333333333333
+"South Kingstown, RI",1,0
+"South Thomaston, ME",1.6,0.20000000000000004
+"Southport, ME",2,0.3333333333333333
+"Southwest Harbor, ME",2,0.3333333333333333
+"Stonington Mystic Pawcatuck, CT",1,0
+"Stonington, ME",4,1
+"Stueben, ME",2.8,0.6
+"Swans Island, ME",3.8,0.9333333333333332
+"Tiverton, RI",1,0
+"Tremont, ME",2,0.3333333333333333
+"Truro, MA",1.4,0.1333333333333333
+"Vinalhaven, ME",3.6,0.8666666666666667
+"Vineyard Haven, MA",1.2,0.06666666666666665
+"Virginia Beach Lynnhaven, VA",1,0
+"Wachapreague, VA",3.4,0.7999999999999999
+"Wanchese, NC",3.6,0.8666666666666667
+"Wareham, MA",1,0
+"Waretown, NJ",2,0.3333333333333333
+"Warwick, RI",1,0
+"Wellfleet, MA",2,0.3333333333333333
+"Westerley Westerley Center, RI",1,0
+"Westport, MA",1,0
+"Wildwood, NJ",1.2,0.06666666666666665
+"Winter Harbor, ME",3.8,0.9333333333333332
+"Winthrop, MA",1,0
+"Woods Hole, MA",1.8,0.26666666666666666
+"Yarmouth, MA",1,0
+"York Harbor, ME",2,0.3333333333333333

@@ -1,0 +1,251 @@
+---
+title: "Fisheries sensitivity"
+author: "LGCarlson"
+date: "10/12/2021"
+output: 
+  html_document:
+    toc: true
+    toc_float: false
+    theme: flatly
+    highlight: haddock
+    df_print: paged
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+
+library(tidyverse)
+library(here)
+library(janitor)
+library(snakecase)
+library(scales)
+library(forcats)
+
+knitr::opts_chunk$set(echo = TRUE)
+
+nth_element <- function(vector, starting_position, n) { 
+  vector[seq(starting_position, length(vector), n)] 
+}
+```
+
+
+### Read in data
+
+```{r read data,message=F,warning=F}
+# data to match COCA and Colburn Community names
+match_names<-read_csv(here::here("metadata", "match_communities_Colburn_to_COCA.csv"))
+
+# sub-dataset for latitudinal sorting
+lat_sort_df <- match_names %>% select(COCACommunity,lat_sort)
+
+# pull in full change dataset (with social vuln data added)
+community_weighted_changes<-read_csv(here::here("input_data","CommunityAggregatedWeightedChangesWithSocVulnDat_10252021.csv")) %>%  
+  select(-X1) 
+
+# clean community names to match with social data
+community_weighted_cleannames<-community_weighted_changes %>% 
+  mutate(COCACommunity = Community) %>% 
+  mutate(Community = gsub("_CT", ",CT", Community)) %>% 
+  mutate(Community = gsub("_MA", ",MA", Community)) %>% 
+  mutate(Community = gsub("_MD", ",MD", Community)) %>% 
+  mutate(Community = gsub("_ME", ",ME", Community)) %>% 
+  mutate(Community = gsub("_NC", ",NC", Community)) %>% 
+  mutate(Community = gsub("_NH", ",NH", Community)) %>% 
+  mutate(Community = gsub("_NJ", ",NJ", Community)) %>% 
+  mutate(Community = gsub("_NY", ",NY", Community)) %>% 
+  mutate(Community = gsub("_RI", ",RI", Community)) %>% 
+  mutate(Community = gsub("_VA", ",VA", Community)) %>% 
+  separate(Community, into = c("community_name","state"),sep = ",") %>% 
+  mutate(community_name = snakecase::to_title_case(community_name)) %>% 
+  mutate(COCA_clean = paste(community_name, state, sep = ", ")) %>% 
+  semi_join(match_names, by = "COCA_clean")
+
+# change "Cape may" to "Cape May"
+community_weighted_cleannames$COCA_clean[community_weighted_cleannames$COCA_clean == "Cape may, NJ"] = "Cape May, NJ"
+
+#length(unique(community_weighted_cleannames$COCA_clean))  should = 144
+
+```
+
+
+```{r,message=F,warning=F}
+# full, raw, social indicator dataset
+social_indicators_original<-read_csv(here::here("input_data", "socialIndicatorData_2011-2015_allUSA.csv")) 
+
+# clean community names to match with COCA data
+social_indicators_clean<-social_indicators_original %>% 
+  janitor::clean_names() %>%       # clean column names
+  mutate(community_name = gsub("/", " ", community_name)) %>%  # replace / with space
+  mutate(community_name = gsub("[()]", "", community_name)) %>%   # remove parentheses
+  mutate(ColburnCommunity = paste(community_name, state, sep = ", ")) %>% 
+  filter(year %in% c(2011,2012,2013,2014,2015)) %>% 
+  select(-supporting_information, -data_series) %>% 
+  right_join(match_names, by = "ColburnCommunity") %>% 
+  select(ColburnCommunity,Colburn_clean,COCA_clean, everything())  
+
+#length(unique(social_indicators_clean$COCA_clean))   should = 144
+
+```
+
+
+### Process data
+
+```{r}
+# process COCA data to extract only percent difference value and volume change for RCP8.5 (keep both time horizons)
+community_changes<-community_weighted_cleannames %>% 
+  mutate_if(is.character, str_replace_all, pattern = ".combo.b", replacement = "") %>% 
+  mutate_if(is.character, str_replace_all, pattern = "Future_", replacement = "") %>% 
+  separate(ProjectionScenario, into = c("TimeHorizon","ClimateScenario","EnsembleStat","ChangeMeasure"),sep = "_", remove = F) %>% 
+  mutate(EnsembleStat = ifelse(EnsembleStat == "cold", "pct5th", EnsembleStat)) %>% 
+  mutate(EnsembleStat = ifelse(EnsembleStat == "warm", "pct95th", EnsembleStat)) %>% 
+  mutate(ChangeMeasure = ifelse(is.na(ChangeMeasure) == T, "raw", ChangeMeasure)) %>% 
+  filter(ChangeMeasure=="percdiff") %>% 
+  filter(EnsembleStat == "mean") %>% 
+  filter(ClimateScenario == "rcp85") %>% 
+  semi_join(match_names, by = "COCACommunity") %>% 
+  select(COCACommunity, COCA_clean, community_name, state, TimeHorizon,ClimateScenario,
+         EnsembleStat,ChangeMeasure,TotalChangeValue,TotalChangeVolume)
+
+#length(unique(community_changes$COCACommunity))   should = 144
+```
+
+
+### Figs. 1-2 Visualize raw data  {.tabset}
+
+#### Value
+
+```{r,fig.height=18, fig.width=10,echo=F}
+community_changes %>% 
+  left_join(lat_sort_df, by = "COCACommunity") %>% 
+  ggplot(aes(x=fct_reorder(COCA_clean,lat_sort,.desc = T), y=TotalChangeValue)) + 
+  geom_hline(yintercept = 0, lty=2, color="darkgrey") + geom_point() + coord_flip() + facet_wrap(~TimeHorizon) + labs(x="",y="Value change (percent difference from baseline)", title="Value Change (%)")
+```
+
+#### Volume
+
+```{r,fig.height=18, fig.width=10,echo=F}
+community_changes %>% 
+  left_join(lat_sort_df, by = "COCACommunity") %>% 
+  ggplot(aes(x=fct_reorder(COCA_clean,lat_sort,.desc = T), y=TotalChangeVolume)) + 
+  geom_hline(yintercept = 0, lty=2, color="darkgrey") + geom_point() + coord_flip() + facet_wrap(~TimeHorizon) + labs(x="",y="Volume change (percent difference from baseline)", title="Volume Change (%)")
+```
+
+
+### Rescale data
+
+```{r}
+# rescale each time horizon individually
+
+#0 to 1 rescale
+rescaled_2055<-community_changes %>% 
+  filter(TimeHorizon == "2055") %>% 
+  mutate(ChangeValue_rescaled = scales::rescale(TotalChangeValue, to=c(0,1))) %>% 
+  mutate(ChangeVolume_rescaled = scales::rescale(TotalChangeVolume, to=c(0,1))) 
+
+#z-transform rescale
+rescaled_2055$ChangeValue_ztransformed = (rescaled_2055$TotalChangeValue - mean(rescaled_2055$TotalChangeValue)) / sd(rescaled_2055$TotalChangeValue)
+
+
+rescaled_2055$ChangeVolume_ztransformed = (rescaled_2055$TotalChangeVolume - mean(rescaled_2055$TotalChangeVolume)) / sd(rescaled_2055$TotalChangeVolume)
+
+
+#0 to 1 rescale
+rescaled_2100<-community_changes %>% 
+  filter(TimeHorizon == "2100") %>% 
+  mutate(ChangeValue_rescaled = scales::rescale(TotalChangeValue, to=c(0,1))) %>% 
+  mutate(ChangeVolume_rescaled = scales::rescale(TotalChangeVolume, to=c(0,1)))
+
+#z-transform rescale
+rescaled_2100$ChangeValue_ztransformed = (rescaled_2100$TotalChangeValue - mean(rescaled_2100$TotalChangeValue)) / sd(rescaled_2100$TotalChangeValue)
+
+
+rescaled_2100$ChangeVolume_ztransformed = (rescaled_2100$TotalChangeVolume - mean(rescaled_2100$TotalChangeVolume)) / sd(rescaled_2100$TotalChangeVolume)
+
+
+# put time horizons back together
+community_changes_rescaled<-bind_rows(rescaled_2055,rescaled_2100) %>% 
+  select(-community_name,-state,-EnsembleStat,-ChangeMeasure)
+
+```
+
+
+
+### Figs. 3-4 Visualize rescaled data {.tabset}
+
+```{r,echo=F}
+volume_rescale<-community_changes_rescaled %>% 
+  left_join(lat_sort_df, by = "COCACommunity") %>% 
+  ggplot(aes(x=fct_reorder(COCA_clean,lat_sort,.desc = T), y=ChangeValue_rescaled)) + geom_hline(yintercept = 0.5, lty=2, color="darkgrey") + geom_point() + coord_flip()  + facet_wrap(~TimeHorizon) + labs(x="",y="Value change (rescaled difference from baseline)", title="Value Change (rescaled 0 to 1)")
+
+value_rescale<-community_changes_rescaled %>% 
+  left_join(lat_sort_df, by = "COCACommunity") %>% 
+  ggplot(aes(x=fct_reorder(COCA_clean,lat_sort,.desc = T), y=ChangeVolume_rescaled)) + geom_hline(yintercept = 0.5, lty=2, color="darkgrey") + geom_point() + coord_flip()  + facet_wrap(~TimeHorizon) + labs(x="",y="Volume change (rescaled difference from baseline)", title="Volume Change (rescaled 0 to 1)")
+```
+
+#### Value
+
+```{r,fig.height=18, fig.width=10,echo=F}
+value_rescale
+```
+
+
+#### Volume
+
+```{r,fig.height=18, fig.width=10,echo=F}
+volume_rescale
+```
+
+
+
+
+
+### Figs. 4-5 Visualize z-transformed data {.tabset}
+
+```{r,echo=F}
+volume_ztrans<-community_changes_rescaled %>% 
+  left_join(lat_sort_df, by = "COCACommunity") %>% 
+  ggplot(aes(x=fct_reorder(COCA_clean,lat_sort,.desc = T), y=ChangeValue_ztransformed)) + geom_hline(yintercept = 0, lty=2, color="darkgrey") + geom_point() + coord_flip()  + facet_wrap(~TimeHorizon) + labs(x="",y="Value change (transformed difference from baseline)", title="Value Change (z-transformed)")
+
+value_ztrans<-community_changes_rescaled %>% 
+  left_join(lat_sort_df, by = "COCACommunity") %>% 
+  ggplot(aes(x=fct_reorder(COCA_clean,lat_sort,.desc = T), y=ChangeVolume_ztransformed)) + geom_hline(yintercept = 0, lty=2, color="darkgrey")+ geom_point() + coord_flip()  + facet_wrap(~TimeHorizon) + labs(x="",y="Volume change (transformed difference from baseline)", title="Volume Change (z-transformed)")
+```
+
+#### Value
+
+```{r,fig.height=18, fig.width=10,echo=F}
+value_ztrans
+```
+
+#### Volume
+
+```{r,fig.height=18, fig.width=10,echo=F}
+volume_ztrans
+```
+
+
+
+
+### Save outputs
+
+#### Figures
+```{r}
+#ggsave(filename = here::here("output_figures/fisheries_sensitivity","fisheries_sensitivity_volume_rescale.pdf"), plot = volume_rescale, height = 18,width = 10)
+
+#ggsave(filename = here::here("output_figures/fisheries_sensitivity","fisheries_sensitivity_value_rescale.pdf"), plot = value_rescale, height = 18,width = 10)
+
+#ggsave(filename = here::here("output_figures/fisheries_sensitivity","fisheries_sensitivity_volume_ztrans.pdf"), plot = volume_ztrans, height = 18,width = 10)
+
+#ggsave(filename = here::here("output_figures/fisheries_sensitivity","fisheries_sensitivity_value_ztrans.pdf"), plot = value_ztrans, height = 18,width = 10)
+
+```
+
+
+#### Data
+
+```{r}
+#write_csv(community_changes_rescaled,here::here("output_data","fisheries_sensitivity_percdiff.csv"))
+```
+
+
+

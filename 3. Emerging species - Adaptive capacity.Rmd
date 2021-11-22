@@ -1,0 +1,274 @@
+---
+title: "Emerging species - Adaptive capacity"
+author: "LGCarlson"
+date: "9/29/2021"
+output: 
+  html_document:
+    toc: true
+    toc_float: false
+    theme: flatly
+    highlight: haddock
+    df_print: paged
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+
+library(tidyverse)
+library(here)
+library(janitor)
+
+knitr::opts_chunk$set(echo = TRUE)
+
+nth_element <- function(vector, starting_position, n) { 
+  vector[seq(starting_position, length(vector), n)] 
+}
+```
+
+
+### Read in social data
+
+```{r read data,message=F,warning=F}
+# full, raw, social indicator dataset
+social_indicators_original<-read_csv(here::here("input_data", "socialIndicatorData_2011-2015_allUSA.csv")) 
+
+# data to match COCA and Colburn Community names
+match_names<-read_csv(here::here("metadata", "match_communities_Colburn_to_COCA.csv"))
+
+# sub-dataset for latitudinal sorting
+lat_sort_df <- match_names %>% select(COCACommunity,lat_sort)
+```
+
+### Read in change data and wrangle community name 
+
+```{r,message=F,warning=F}
+# pull in full change dataset
+community_weighted_changes<-read_csv(here::here("input_data","CommunityAggregatedWeightedChangesWithSocVulnDat_10252021.csv")) %>%  select(-X1) %>% 
+  select(Community, ProjectionScenario, TotalChangeValue,TotalChangeVolume)
+
+# clean community names to match with social data
+community_weighted_cleannames<-community_weighted_changes %>% 
+  mutate(COCACommunity = Community) %>% 
+  mutate(Community = gsub("_CT", ",CT", Community)) %>% 
+  mutate(Community = gsub("_MA", ",MA", Community)) %>% 
+  mutate(Community = gsub("_MD", ",MD", Community)) %>% 
+  mutate(Community = gsub("_ME", ",ME", Community)) %>% 
+  mutate(Community = gsub("_NC", ",NC", Community)) %>% 
+  mutate(Community = gsub("_NH", ",NH", Community)) %>% 
+  mutate(Community = gsub("_NJ", ",NJ", Community)) %>% 
+  mutate(Community = gsub("_NY", ",NY", Community)) %>% 
+  mutate(Community = gsub("_RI", ",RI", Community)) %>% 
+  mutate(Community = gsub("_VA", ",VA", Community)) %>% 
+  separate(Community, into = c("community_name","state"),sep = ",") %>% 
+  mutate(community_name = snakecase::to_title_case(community_name)) %>% 
+  mutate(COCA_clean = paste(community_name, state, sep = ", ")) %>% 
+  semi_join(match_names, by = "COCA_clean") 
+
+# change "Cape may" to "Cape May"
+community_weighted_cleannames$COCA_clean[community_weighted_cleannames$COCA_clean == "Cape may, NJ"] = "Cape May, NJ"
+
+#length(unique(community_weighted_cleannames$COCA_clean))
+
+# pull in weighted change dataset
+species_weighted_changes<-read_csv(here::here("input_data","SpeciesCommunityCFDERSWeightedChanges_10182021.csv"))  %>%  select(-X1)
+
+
+# clean community names to match with social data
+species_weighted_cleannames<-species_weighted_changes %>% 
+  mutate(COCACommunity = Community) %>% 
+  mutate(Community = gsub("_CT", ",CT", Community)) %>% 
+  mutate(Community = gsub("_MA", ",MA", Community)) %>% 
+  mutate(Community = gsub("_MD", ",MD", Community)) %>% 
+  mutate(Community = gsub("_ME", ",ME", Community)) %>% 
+  mutate(Community = gsub("_NC", ",NC", Community)) %>% 
+  mutate(Community = gsub("_NH", ",NH", Community)) %>% 
+  mutate(Community = gsub("_NJ", ",NJ", Community)) %>% 
+  mutate(Community = gsub("_NY", ",NY", Community)) %>% 
+  mutate(Community = gsub("_RI", ",RI", Community)) %>% 
+  mutate(Community = gsub("_VA", ",VA", Community)) %>% 
+  mutate(Community = gsub(",MARSHFIELD_", "_MARSHFIELD_", Community)) %>% 
+  separate(Community, into = c("community_name","state"),sep = ",") %>% 
+  mutate(community_name = snakecase::to_title_case(community_name)) %>% 
+  mutate(COCA_clean = paste(community_name, state, sep = ", ")) %>% 
+  semi_join(match_names, by = "COCA_clean") 
+
+#length(unique(species_weighted_cleannames$COCA_clean))  should = 144
+```
+
+### Create baseline dataset
+
+```{r,message=F,warning=F}
+changes_expanded<-species_weighted_cleannames %>% 
+  mutate_if(is.character, str_replace_all, pattern = ".combo.b", replacement = "") %>% 
+  mutate_if(is.character, str_replace_all, pattern = "Future_", replacement = "") %>% 
+  separate(ProjectionScenario, into = c("TimeHorizon","ClimateScenario","EnsembleStat","ChangeMeasure"),sep = "_", remove = F) %>% 
+  mutate(EnsembleStat = ifelse(EnsembleStat == "cold", "pct5th", EnsembleStat)) %>% 
+  mutate(EnsembleStat = ifelse(EnsembleStat == "warm", "pct95th", EnsembleStat)) %>% 
+  mutate(ChangeMeasure = ifelse(is.na(ChangeMeasure) == T, "raw", ChangeMeasure))
+
+table(changes_expanded$ChangeMeasure)
+
+baseline_vals<-changes_expanded %>% 
+  filter(ProjectionScenario == "Baseline") %>%
+  dplyr::select(COCA_clean, CommonName, ProjectionValue) %>% 
+  filter(!is.na(ProjectionValue)) %>% 
+  dplyr::rename("BaselineProjection" = "ProjectionValue") 
+
+```
+
+
+
+### Create a function to wrangle weighted changes data 
+
+*Calculate the percent increase for each species based on the percent change between ProjectionValue in the baseline scenario and the ProjectionValue in the alternate scenarios*
+
+```{r,message=F,warning=F}
+wrangle<-function(dftomodify, ceiling, percentcutoff, ensemblestat){
+  
+  # dftomodify is an object of class "dataframe" or "tibble" that contains a minimally processed version of "SpeciesCommunityCFDERSWeightedChangesBothRCPs.csv" 
+  # ceiling is a numeric value defining what the threshold for ProportionVolume should be >= to
+  # percent cutoff is a numeric value defining what the shreshold for PercentChange should be >= to
+  # ensemble stat is a vector of characters describing which ensemble scenarios should be included in the data should be either one or multiple of the following c("mean","pct5th","pct95th")
+  
+  dftomodify %>% 
+    filter(ProjectionScenario != "Baseline") %>% 
+    mutate(ProportionVolume = if_else(is.na(ProportionVolume), 0, ProportionVolume)) %>% #many ProportionVolumes with NA
+    filter(ProportionVolume <= ceiling) %>% 
+    filter(ChangeMeasure == "raw") %>% 
+    mutate(TimeHorizon = as.numeric(TimeHorizon)) %>% 
+    dplyr::rename("ScenarioProjection" = "ProjectionValue") %>% 
+    dplyr::select(COCA_clean,CommonName,ProjectionScenario,TimeHorizon,ClimateScenario,
+                  EnsembleStat,ChangeMeasure,Statistic,ScenarioProjection) %>% 
+    right_join(baseline_vals, by = c("COCA_clean","CommonName")) %>% 
+    filter(BaselineProjection < ScenarioProjection) %>% 
+    mutate(PercentChange = ((ScenarioProjection - BaselineProjection)/BaselineProjection)*100) %>% 
+    filter(PercentChange > percentcutoff) %>% 
+    left_join(match_names, by="COCA_clean") %>% 
+    filter(!is.na(COCA_clean)) %>% 
+    group_by(COCA_clean,lat_sort, TimeHorizon, 
+             ClimateScenario, EnsembleStat) %>% 
+    summarise(n=n(),.groups="keep") %>% 
+    mutate(ClimateScenarioLabs = ifelse(ClimateScenario == "rcp45","RCP 4.5","RCP 8.5")) %>% 
+    mutate(TimeHorizonLabs = ifelse(TimeHorizon == "2055", "Mid-century", "Late century")) %>% 
+    filter(EnsembleStat %in% ensemblestat)
+}
+```
+
+
+
+
+### Create data for 0.1% Proportion volume ceiling, >100% increase (Mean ensemble)
+
+```{r,message=F,warning=F}
+mean_100_ceiling<-wrangle(changes_expanded, 0.001, 100, c("mean")) %>% 
+  mutate(Ceiling = "0.1% proportion volume ceiling") %>% 
+  mutate(PercentIncrease = ">100% increase") %>% 
+  rename("EmergingSpecies" = "n") %>% 
+  filter(ClimateScenario == "rcp85")
+```
+
+
+
+### Create a function to plot the emerging species data created by wrangle. 
+
+*This function only works for visualizing on ensemble stat at a time.*
+
+```{r,message=F,warning=F}
+plot_emerging_singleensemblestat<-function(dftoplot,pointcolorvalue,ceilinglabel,ensemblelabel,percentincreaselabel){
+  
+  # dftoplot is an object of class "dataframe" or "tibble" which has been processed by the wrangle function
+  # ylabsortdf is an object of class "dataframe" or "tibble" which has been processed by the latsort function
+  # ceilinglabel is a string, should be enclosed with quotations, that describes whether a total volume ceiling has been imposed by wrangle
+  # ensemble label is a string, should be enclosed with quotations, that describes which ensemble statistic is being visualised (could be "Mean ensemble", "5% ensemble", or "95% ensemble") *this function can only plot one ensemble stat at a time
+  # percentincrease label is a string, should be enclosed with quotations, that describes the number of emerging species given the percent increase threshold imposed by wrangle (could be 50% or 100% increase)
+  
+  dftoplot %>% 
+ggplot(aes(x=fct_reorder(COCA_clean,lat_sort,.desc = T), y=EmergingSpecies)) + geom_point(color = pointcolorvalue) +
+  #facet_grid(rows=vars(fct_reorder(TimeHorizonLabs,TimeHorizon, .desc = F)), cols=vars(ClimateScenarioLabs)) +
+  facet_grid(cols=vars(TimeHorizon)) +
+  coord_flip() +
+  theme(axis.text.y = element_text(size =7)) +
+  labs(x="", y=percentincreaselabel, title=ceilinglabel, subtitle = ensemblelabel) 
+}
+```
+
+
+
+### Fig. 1 Visualize raw emerging species data
+
+*0.1% Proportion volume ceiling, >100% increase (All ensemble stats)*
+
+```{r,fig.height=18,fig.width=10,echo=F,message=F,warning=F}
+
+plot_emerging_singleensemblestat(mean_100_ceiling,"black","Number of emerging species","Mean ensemble, >100% increase, 0.1% proportion volume ceiling","Emerging species (n)") 
+
+```
+
+
+
+
+### Rescale data
+
+```{r,message=F,warning=F}
+# rescale each time horizon individually
+
+#0 to 1 rescale
+rescaled_2055<-mean_100_ceiling %>% 
+  filter(TimeHorizon == "2055") 
+
+rescaled_2055$EmergingSpecies = scales::rescale(rescaled_2055$EmergingSpecies, to=c(0,1))
+
+#0 to 1 rescale
+rescaled_2100<-mean_100_ceiling %>% 
+  filter(TimeHorizon == "2100") 
+
+rescaled_2100$EmergingSpecies = scales::rescale(rescaled_2100$EmergingSpecies, to=c(0,1))
+
+# put time horizons back together
+mean_100_ceiling_rescaled<-bind_rows(rescaled_2055,rescaled_2100) 
+
+mean_100_ceiling_rescaled_renamed<-mean_100_ceiling_rescaled %>% 
+  select(COCA_clean,TimeHorizon,ClimateScenario,EnsembleStat,EmergingSpecies,lat_sort) %>% 
+  rename("EmergingSpecies_rescaled" = "EmergingSpecies")
+
+```
+
+
+
+### Fig. 2 Visualize rescaled emerging species data
+
+*0.1% Proportion volume ceiling, >100% increase (All ensemble stats)*
+*Number of emerging species rescaled 0 to 1*
+
+```{r,fig.height=18,fig.width=10,echo=F,message=F,warning=F}
+
+plot_emerging_singleensemblestat(mean_100_ceiling_rescaled,"black","Number of emerging species, rescaled 0 to 1","Mean ensemble, >100% increase, 0.1% proportion volume ceiling","Emerging species (n)") 
+
+```
+
+
+```{r,message=F,warning=F}
+emerging_species_final<-mean_100_ceiling %>% 
+  left_join(match_names, by = "COCA_clean") %>% 
+  left_join(mean_100_ceiling_rescaled_renamed, by = c("COCA_clean","TimeHorizon","ClimateScenario","EnsembleStat")) %>% 
+  select(COCACommunity,COCA_clean,TimeHorizon,ClimateScenario,EnsembleStat,EmergingSpecies,EmergingSpecies_rescaled)
+
+```
+
+### Save output
+
+#### Data
+
+```{r}
+#write_csv(emerging_species_final,here::here("output_data","emerging_species_100ceiling_rescaled.csv"))
+```
+
+
+#### Figures
+
+```{r}
+#ggsave(filename = here::here("output_figures/emerging_species","emerging_species_100ceiling.pdf"), plot = last_plot(), height = 18,width = 10)
+
+#ggsave(filename = here::here("output_figures/emerging_species","emerging_species_100ceiling_rescaled.pdf"), plot = last_plot(), height = 18,width = 10)
+```
+

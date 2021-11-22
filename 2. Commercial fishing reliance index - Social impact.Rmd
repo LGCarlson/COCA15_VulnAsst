@@ -1,0 +1,149 @@
+---
+title: "Commercial fishing reliance index - Sensitivity"
+author: "LGCarlson"
+date: "10/1/2021"
+output: 
+  html_document:
+    toc: true
+    toc_float: false
+    theme: flatly
+    highlight: haddock
+    df_print: paged
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+
+library(tidyverse)
+library(here)
+library(janitor)
+library(snakecase)
+library(scales)
+library(forcats)
+
+knitr::opts_chunk$set(echo = TRUE)
+
+nth_element <- function(vector, starting_position, n) { 
+  vector[seq(starting_position, length(vector), n)] 
+}
+```
+
+
+### Read in data
+
+```{r read data,message=F}
+# data to match COCA and Colburn Community names
+match_names<-read_csv(here::here("metadata", "match_communities_Colburn_to_COCA.csv"))
+
+# sub-dataset for latitudinal sorting
+lat_sort_df <- match_names %>% select(COCACommunity,lat_sort)
+
+# full, raw, social indicator dataset
+social_indicators_original<-read_csv(here::here("input_data", "socialIndicatorData_2011-2015_allUSA.csv")) 
+```
+
+
+
+### Create clean social indicators dataset with only communities and indicators of interest 
+
+```{r clean data}
+commercial_reliance_clean<-social_indicators_original %>% 
+  janitor::clean_names() %>%       # clean column names
+  mutate(community_name = gsub("/", " ", community_name)) %>%  # replace / with space
+  mutate(community_name = gsub("[()]", "", community_name)) %>%   # remove parentheses
+  mutate(ColburnCommunity = paste(community_name, state, sep = ", ")) %>%   
+  right_join(match_names, by = "ColburnCommunity") %>%    # keep only communities of interest
+  dplyr::select(ColburnCommunity,COCA_clean, COCACommunity, year, community_name,state,region, 
+                latitude, longitude, lat_sort,commercial_reliance_categorical_ranking) %>%  
+                                    #select social indicator columns
+  filter(year %in% c(2011,2012,2013,2014,2015))   # filter to years of study
+
+# length(unique(commercial_reliance_clean$COCACommunity)) should = 144
+```
+
+
+```{r create accessory data}
+community_metadata<-commercial_reliance_clean %>% 
+  distinct(COCA_clean, .keep_all=T) %>% 
+  select(ColburnCommunity,COCACommunity,COCA_clean,community_name,state,latitude,longitude,lat_sort)
+```
+
+
+### Calculate commercial reliance summary statistics
+
+```{r calculate summary stats}
+commercial_reliance_stats<-commercial_reliance_clean %>%  
+  group_by(COCA_clean) %>%
+  summarise(sum_commreliance=sum(commercial_reliance_categorical_ranking, na.rm = T),
+            mean_commreliance=mean(commercial_reliance_categorical_ranking,na.rm = T), 
+            sd_commreliance=sd(commercial_reliance_categorical_ranking,na.rm = T),
+            se_commreliance=sd_commreliance/5, 
+            min_commreliance=min(commercial_reliance_categorical_ranking, na.rm = T),
+            max_commreliance=max(commercial_reliance_categorical_ranking, na.rm = T), 
+            range_commreliance = max_commreliance-min_commreliance) 
+```
+
+
+### Fig. 1 Visualize mean commercial reliance by community
+
+```{r data vis 1,echo=F,fig.height=18,fig.width=10}
+commercial_reliance_plot<-commercial_reliance_stats %>% 
+  left_join(community_metadata, by = "COCA_clean") %>% 
+  ggplot(aes(x=fct_reorder(COCA_clean,latitude,.desc = F), y=mean_commreliance)) +
+  geom_errorbar(aes(ymin=min_commreliance,ymax=max_commreliance),width = 0.5, alpha=0.5,size=0.5) + 
+  geom_point(size=2) + 
+  coord_flip() +
+  scale_y_continuous(breaks = c(1,2,3,4), labels = c("Low", "Medium", "High","Very High")) +
+  labs(x="", y="Mean and range",
+       title="Commercial reliance (2011-2015)") 
+commercial_reliance_plot
+```
+
+
+
+
+#### Rescale data
+
+```{r}
+#0 to 1 rescale
+commercial_reliance_final<-commercial_reliance_stats %>% 
+  select(COCA_clean,mean_commreliance)
+
+
+commercial_reliance_final$rescaled_commreliance = scales::rescale(commercial_reliance_final$mean_commreliance, to=c(0,1))
+```
+
+
+
+### Fig. 2 Visualize rescaled mean commercial reliance
+
+```{r data vis 2,echo=F,fig.height=18,fig.width=10}
+rescaled_plot<-commercial_reliance_final %>% 
+  left_join(community_metadata, by = "COCA_clean") %>% 
+  ggplot(aes(x=fct_reorder(COCA_clean,latitude,.desc = F), y=rescaled_commreliance)) +
+  geom_point(size=2) +  coord_flip() +
+  labs(x="", y="Commercial reliance",
+       title="Mean commercial reliance (rescaled 0 to 1)") 
+rescaled_plot
+```
+
+
+
+
+
+### Save outputs
+
+#### Data
+
+```{r write to csv}
+#write_csv(commercial_reliance_final,here::here("output_data","commercial_reliance_rescaled.csv"))
+```
+
+#### Figures
+
+```{r output figure}
+#ggsave(here::here("output_figures/commercial_reliance","mean_commercial_reliance.pdf"),plot=commercial_reliance_plot, height = 18,width = 10)
+
+#ggsave(here::here("output_figures/commercial_reliance","mean_commercial_reliance_rescaled.pdf"),plot=rescaled_plot, height = 18,width = 10)
+```
+

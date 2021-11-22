@@ -1,0 +1,94 @@
+---
+title: "Social impact"
+author: "LGCarlson"
+date: "10/12/2021"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: flatly
+    highlight: haddock
+---
+
+
+
+```{r setup, include=FALSE}
+
+library(tidyverse)
+library(here)
+library(janitor)
+
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+#### Read in data
+
+```{r read data,message=F}
+# data to match COCA and Colburn Community names
+match_names<-read_csv(here::here("metadata", "match_communities_Colburn_to_COCA.csv"))
+
+# sub-dataset for latitudinal sorting
+lat_sort_df <- match_names %>% select(COCA_clean,lat_sort)
+
+# change "Cape may" to "Cape May"
+lat_sort_df$COCA_clean[lat_sort_df$COCA_clean == "Cape may, NJ"] = "Cape May, NJ"
+
+
+# fisheries sensitivity (percent diff) data
+fisheries_sensitivity_percdiff<-read_csv(here::here("output_data", "fisheries_sensitivity_percdiff.csv")) 
+
+# commercial reliance data
+commercial_reliance_rescaled<-read_csv(here::here("output_data", "commercial_reliance_rescaled.csv"))  
+
+# change "Cape may" to "Cape May"
+commercial_reliance_rescaled$COCA_clean[commercial_reliance_rescaled$COCA_clean == "Cape may, NJ"] = "Cape May, NJ"
+```
+
+
+```{r}
+social_impact_full<-fisheries_sensitivity_percdiff %>% 
+  left_join(commercial_reliance_rescaled, by ="COCA_clean") %>% 
+  mutate(social_impact_raw = mean_commreliance*TotalChangeValue) %>% 
+  mutate(social_impact_presacledchange = mean_commreliance*ChangeValue_rescaled) %>% 
+  mutate(social_impact_pretranschange = mean_commreliance*ChangeValue_ztransformed) %>% 
+  mutate(social_impact_fullyscaled = rescaled_commreliance*ChangeValue_rescaled) %>%  
+  mutate(social_impact_fullytrans = rescaled_commreliance*ChangeValue_ztransformed) %>% 
+  select(COCA_clean, TimeHorizon,social_impact_raw, social_impact_presacledchange, social_impact_pretranschange,social_impact_fullyscaled,social_impact_fullytrans)
+
+social_impact_long<-social_impact_full %>% 
+  gather(key="social_impact",value = "value",3:7) %>% 
+  mutate(social_impact = gsub("social_impact_", "", social_impact)) 
+```
+
+
+
+### Visualize mean adaptive capacity by community
+
+```{r data vis,fig.height=18,fig.width=10}
+social_impact_vars<-social_impact_long %>% 
+  left_join(lat_sort_df, by = "COCA_clean") %>% 
+  ggplot(aes(x=fct_reorder(COCA_clean,lat_sort,.desc = T), y=value)) +
+   geom_point(aes(color=as.factor(TimeHorizon))) + coord_flip() + facet_wrap(~social_impact,nrow = 1,scales = "free_x") + theme(legend.position = "bottom") +
+  labs(x="", y="", title="Social impact",legend="Time Horizon")  + scale_color_manual(values=c("darkgrey","black"))
+social_impact_vars
+```
+
+
+
+### Write figure to output_figures folder
+
+```{r output figure}
+#ggsave(here::here("output_figures/social_impact","social_impact_variations.pdf"),plot=social_impact_vars, height = 18,width = 14)
+```
+
+
+### Write data to output folder
+
+```{r write to csv}
+#write_csv(social_impact_full,here::here("output_data","social_impact_full_variations.csv"))
+```
+
+
+
+
