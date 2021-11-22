@@ -1,0 +1,37 @@
+Column Name,Variable Type,Description 
+Commercial Engagement,Numeric,Commercial Fishing Engagement factor score
+Commercial Engagement Categorical Ranking,Numeric,Commercial Fishing Engagement categorical ranking
+Commercial Reliance,Numeric,Commercial Reliance factor score
+Commercial Reliance Categorical Ranking,Numeric,Commercial Reliance categorical ranking
+Community Name,String,Name of the community
+Housing Characteristics,Numeric,Housing Characteristics factor score
+Housing Characteristics Categorical Ranking,Numeric,Housing Characteristics categorical ranking
+Housing Disruption,Numeric,Housing Disruption factor score
+Housing Disruption Categorical Ranking,Numeric,Housing Disruption categorical ranking
+Labor Force,Numeric,Labor Force Structure factor score (reversed)
+Labor Force Categorical Ranking,Numeric,Labor Force Structure categorical ranking
+Latitude,Numeric,Latitude of the community location
+Longitude,Numeric,Longitude of the community location
+Personal Disruption,Numeric,Personal Disruption factor score
+Personal Disruption Categorical Ranking,Numeric,Personal Disruption categorical ranking
+Population Composition,Numeric,Population Composition factor score
+Population Composition Categorical Ranking,Numeric,Population Composition categorical ranking
+Poverty,Numeric,Poverty factor score
+Poverty Categorical Ranking,Numeric,Poverty categorical ranking
+Region,String,The region a community belongs to.
+Recreational Engagement,Numeric,Recreational Engagement factor score
+Recreational Engagement Categorical Ranking,Numeric,Recreational Engagement categorical ranking
+Recreational Reliance,Numeric,Recreational Reliance factor score
+Recreational Reliance Categorical Ranking,Numeric,Recreational Reliance categorical ranking
+Retiree Migration,Numeric,Retiree Migration factor score
+Retiree Migration Categorical Ranking,Numeric,Retiree Migration categorical ranking
+Sea Level Rise Risk,Numeric,Inundation Risk factor score
+Sea Level Rise Risk Categorical Ranking,Numeric,Inundation Risk categorical ranking
+Storm Surge Risk,Numeric,Storm Surge Risk factor score
+Storm Surge Risk Categorical Ranking,Numeric,Storm Surge Risk categorical ranking
+State,String,State abbreviation
+Urban Sprawl,Numeric,Urban Sprawl factor score
+Urban Sprawl Categorical Ranking,Numeric,Urban Sprawl categorical ranking
+Supporting Information,String,Website link with supporting information
+Data Series,String,Description of the data sources
+Year,Numeric,Data year

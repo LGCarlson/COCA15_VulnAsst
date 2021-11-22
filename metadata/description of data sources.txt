@@ -1,0 +1,9 @@
+socialIndicatorData_2011-2015_allUSA.csv 
+
+queried from https://www.st.nmfs.noaa.gov/data-and-tools/social-indicators/ on 10/7/2021
+description and metadata can be found at: https://www.fisheries.noaa.gov/national/socioeconomics/social-indicator-supporting-information#methodology
+
+Contact person for this data:
+Colburn, Lisa L     lisa.l.colburn@noaa.gov
+
+
